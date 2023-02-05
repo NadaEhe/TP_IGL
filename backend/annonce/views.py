@@ -17,14 +17,9 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.pagination import PageNumberPagination
 from base.models import User
-# from django_filters import rest_framework as filters
-
 import django_filters
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
-
-
-# from django_filters.rest_framework import DjangoFilterBackend
 
 
 # Create your views here.
@@ -100,10 +95,6 @@ def createFavoriteRequest(request):
     if request.method == 'POST':
         return createFavorites(request)
     
-# @api_view(['GET'])
-# def getFavoritesRequest(request):
-#     if request.method == 'GET':
-#         return getFavorites(request)
 @api_view(['POST', 'GET'])
 def getFavorites(request , user_id):
 
@@ -149,12 +140,6 @@ def getAnnounceByNameView(request, name):
     return getAnnounceByName(request, name)
 
 
-# class AnnonceFilter(filters.FilterSet):
-#     created__gte = filters.DateTimeFilter(field_name='created', lookup_expr='gte')
-
-#     class Meta:
-#         model = Annonce
-#         fields = ['created__gte']
 
 class AnnonceDateFilter(django_filters.FilterSet):
     created__gte = django_filters.DateTimeFilter(field_name='created', method='filter_by_date_range')
@@ -202,13 +187,6 @@ class AnnonceSearch(generics.ListAPIView):
 
 
 
-    # def get(self, request, *args, **kwargs):
-    #     print(request.GET)
-    #     queryset = self.filter_queryset(self.queryset)
-    #     print(queryset.query)
-    #     return super().get(request, *args, **kwargs)
-
-
 class AnnonceViewSet(ModelViewSet):
     queryset = Annonce.objects.all()
     serializer_class = AnnonceSerializer
@@ -220,22 +198,14 @@ class AnnonceViewSet(ModelViewSet):
     pagination_class = PageNumberPagination
 
 class Favorites(ModelViewSet):
-    # permission_classes = [AllowAny]
-    serializer_class = FavSerializer
+   serializer_class = FavSerializer
     queryset = Fav.objects.all()
 
-
-    # def get_queryset(self):
-    #     return Fav.objects.filter(liker__fname ="dante" )   
-
-    # DjangoFilterBackend
 
 
 
 class WithImages(generics.ListAPIView):
-    # permission_classes = [AllowAny]
-
-    serializer_class = PhotoSerializer
+   serializer_class = PhotoSerializer
     def get_queryset(self):
         return Photo.objects.all()
     
