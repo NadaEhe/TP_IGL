@@ -40,9 +40,6 @@ class AnnonceSerializer(serializers.ModelSerializer):
         return userSerializer(obj.author).data    
 
 class FavSerializer(ModelSerializer):
-    # annonce_detail = SerializerMethodField()
-    class Meta:
+   class Meta:
         model = Fav
-        fields = ('id', 'user' , 'annonce' ,)
-    # def get_annonce_info(self , obj):
-    #     return AnnonceSerializer(obj.annonce).data    
+        fields = ('id', 'user' , 'annonce' ,)   
