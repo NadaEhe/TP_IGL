@@ -1,15 +1,10 @@
 from rest_framework.test import APITestCase, APIRequestFactory
-# from .views import PostListCreateView
 from django.urls import reverse
 from rest_framework import status
-# from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from base.models import User
 from .models import Annonce
 
-
-
-# User = get_user_model()
 
 
 class TestAnnonceCreation(APITestCase):
